@@ -69,17 +69,33 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DocProject.wsgi.application'
-
+import os
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.ofahoxxyxxtyxjurqzby',
+        'PASSWORD': 'Docuhealth@310104',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
+        'PORT': '6543',
+        'OPTIONS': {
+            'sslmode': 'verify-full',
+            'sslrootcert': os.path.join(BASE_DIR, 'certs', 'cert.crt'),
+        }
+    }
+}
+
 
 
 # Password validation
