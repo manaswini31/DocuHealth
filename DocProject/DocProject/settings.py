@@ -71,6 +71,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'DocProject.wsgi.application'
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django_cockroachdb',
+        'NAME': 'evconnectpostgres',
+        'USER': 'phanendra',
+        'PASSWORD': 'UZh51Yuh6JVjt5ggrA-_Pw',
+        'HOST': 'evconnect-5753.7s5.aws-ap-south-1.cockroachlabs.cloud',
+        'PORT': '26257',
+        'OPTIONS': {
+            'sslmode': 'verify-full',
+            'sslrootcert': os.path.join(BASE_DIR, 'certs', 'root.crt'),
+        }
+    }
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 """
@@ -80,6 +98,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+
 """
 DATABASES = {
     'default': {
@@ -95,7 +115,7 @@ DATABASES = {
         }
     }
 }
-
+"""
 
 
 # Password validation
