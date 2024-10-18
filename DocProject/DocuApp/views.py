@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.db.models import Q  # Correct import for Q
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -11,6 +11,7 @@ from .models import Doctor, Patient
 from .forms import DoctorSignupForm, AddPatientForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+
 # Doctor Sign Up and Login (combined in one page)
 def doctor_auth(request):
     signup_form = DoctorSignupForm()
@@ -100,6 +101,20 @@ def add_patient(request):
     
     return render(request, 'DocuApp/add_patient.html', {'form': form})
 
+
+@login_required
+def search_doctors(request):
+    query = request.GET.get('q')
+    doctors = Doctor.objects.all()
+    
+    if query:
+        doctors = doctors.filter(
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query) |
+            Q(specialization__icontains=query)
+        )
+    
+    return render(request, 'DocuApp/search_doctors.html', {'doctors': doctors, 'query': query})
 
 # Generate a unique patient ID (e.g., based on timestamp or custom logic)
 import time

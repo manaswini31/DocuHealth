@@ -1,0 +1,37 @@
+<!-- search_doctors.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Doctors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Search Doctors</h2>
+    
+    <!-- Search form -->
+    <form method="GET" action="{% url 'search_doctors' %}" class="form-inline my-4">
+        <input type="text" name="q" class="form-control mr-sm-2" placeholder="Search by name or specialization" value="{{ query }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <!-- Display search results -->
+    {% if doctors %}
+        <h3>Results</h3>
+        <ul class="list-group">
+            {% for doctor in doctors %}
+            <li class="list-group-item">
+                Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }} - {{ doctor.specialization }}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No doctors found matching your search criteria.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
