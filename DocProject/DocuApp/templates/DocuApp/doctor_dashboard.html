@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome, {{ doctor.user.username }} ({{ doctor.specialization }})</h2>
+
+<h3>Your Patients</h3>
+<ul>
+    {% for patient in patients %}
+    <li>{{ patient.first_name }} {{ patient.last_name }} (Patient ID: {{ patient.patient_id }})</li>
+    {% empty %}
+    <li>No patients added yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'add_patient' %}">Add New Patient</a>
+
+</body>
+</html>

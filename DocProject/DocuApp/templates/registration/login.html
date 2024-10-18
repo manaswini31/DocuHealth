@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Auth</title>
+</head>
+<body>
+
+<h2>Doctor Authentication</h2>
+
+<!-- Signup Form -->
+<h3>Sign Up</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ signup_form.as_p }}
+    <button type="submit" name="signup">Sign Up</button>
+</form>
+
+<!-- Login Form -->
+<h3>Login</h3>
+<form method="POST">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" name="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" required>
+    <button type="submit" name="login">Login</button>
+    {% if login_error %}
+    <p>{{ login_error }}</p>
+    {% endif %}
+</form>
+
+<!-- Button to Redirect to Patient Login -->
+<h3>Patient Login</h3>
+<a href="{% url 'patient_login' %}">
+    <button type="button">Go to Patient Login</button>
+</a>
+
+</body>
+</html>

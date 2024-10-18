@@ -15,8 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+from DocuApp import views as DocuApp_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('DocuApp/', include('DocuApp.urls')),
+    path('', DocuApp_views.doctor_auth, name='home'),  # Add this to point the root URL to the login page
+    path('accounts/', include('django.contrib.auth.urls')),  # Add this line to include Django's authentication system
+
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,16 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="first_name">First name:</label>
+    <input type="text" name="first_name" required><br>
+
+    <label for="last_name">Last name:</label>
+    <input type="text" name="last_name" required><br>
+
+    <label for="dob">Dob:</label>
+    <input type="date" name="dob" required><br>  <!-- This ensures a date picker -->
+
+    <label for="report">Report:</label>
+    <input type="file" name="report" required><br>  <!-- For PDF report upload -->
+
+    <button type="submit">Add Patient</button>
+</form>

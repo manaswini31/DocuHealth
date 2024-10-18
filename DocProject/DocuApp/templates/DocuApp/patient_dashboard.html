@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome, {{ patient.first_name }} {{ patient.last_name }}</h2>
+<p>Your Doctor is: Dr. {{ patient.doctor.user.first_name }} {{ patient.doctor.user.last_name }}</p>
+<p>Your report: <a href="{{ patient.report.url }}">Download</a></p>
+<p>Date of Birth: {{ patient.dob }}</p>
+
+</body>
+</html>
