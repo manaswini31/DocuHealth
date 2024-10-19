@@ -243,6 +243,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 
+
 def forgot_password(request):
     if request.method == 'POST':
         # Handle sending the OTP
