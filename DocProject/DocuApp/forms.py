@@ -1,11 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Patient
+
 # Doctor Signup Form
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Doctor
+from .models import Patient
+
 
 class DoctorSignupForm(UserCreationForm):
     first_name = forms.CharField(max_length=100)
