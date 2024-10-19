@@ -102,7 +102,12 @@ def add_patient(request):
     return render(request, 'DocuApp/add_patient.html', {'form': form})
 
 
-@login_required
+# DocuApp/views.py
+
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Doctor
+
 def search_doctors(request):
     query = request.GET.get('q')
     doctors = Doctor.objects.all()
@@ -116,7 +121,109 @@ def search_doctors(request):
     
     return render(request, 'DocuApp/search_doctors.html', {'doctors': doctors, 'query': query})
 
+
 # Generate a unique patient ID (e.g., based on timestamp or custom logic)
 import time
 def generate_patient_id():
     return str(int(time.time()))  # Example: timestamp-based unique ID
+# views.py
+
+
+def home(request):
+    return render(request, 'DocuApp/home.html')
+
+def appointments_page(request):
+    return render(request, 'DocuApp/appointments.html')
+
+def articles_page(request):
+    return render(request, 'DocuApp/articles.html')
+
+def feedback_page(request):
+    return render(request, 'DocuApp/feedback.html')
+
+def contact_page(request):
+    return render(request, 'DocuApp/contact.html')
+
+def help_page(request):
+    return render(request, 'DocuApp/help.html')
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.utils import timezone
+from django.contrib.auth.forms import SetPasswordForm
+from .models import OTPVerification
+import random
+
+# DocuApp/views.py
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
+from .models import OTPVerification
+import random
+
+# views.py
+
+from django.contrib.auth.models import User
+
+def send_otp(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            # Use filter() to get the first user with this email
+            user = User.objects.filter(email=email).first()
+            if not user:
+                return render(request, 'DocuApp/send_otp.html', {'error': 'User with this email does not exist.'})
+
+            otp_code = str(random.randint(100000, 999999))
+
+            # Save or update the OTP for the user
+            otp_verification, created = OTPVerification.objects.get_or_create(user=user)
+            otp_verification.otp_code = otp_code
+            otp_verification.save()
+
+            # Send email
+            send_mail(
+                'Your OTP Code',
+                f'Your OTP code is {otp_code}. It is valid for 10 minutes.',
+                'from@example.com',  # Replace with your email address
+                [email],
+                fail_silently=False,
+            )
+            return redirect('verify_otp', user_id=user.id)
+        except Exception as e:
+            return render(request, 'DocuApp/send_otp.html', {'error': str(e)})
+
+    return render(request, 'DocuApp/send_otp.html')
+
+
+
+
+def verify_otp(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        otp_code = request.POST.get('otp_code')
+        otp_verification = OTPVerification.objects.filter(user=user, otp_code=otp_code).first()
+
+        if otp_verification and otp_verification.is_valid():
+            return redirect('reset_password', user_id=user.id)
+        else:
+            return render(request, 'DocuApp/verify_otp.html', {'user': user, 'error': 'Invalid or expired OTP.'})
+
+    return render(request, 'DocuApp/verify_otp.html', {'user': user})
+
+
+def reset_password(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        form = SetPasswordForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SetPasswordForm(user)
+
+    return render(request, 'DocuApp/reset_password.html', {'form': form})
+

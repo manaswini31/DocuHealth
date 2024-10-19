@@ -1,41 +1,44 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Auth</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container mt-5">
+        <h2>Doctor Authentication</h2>
 
-<h2>Doctor Authentication</h2>
+        <!-- Signup Form -->
+        <h3>Sign Up</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ signup_form.as_p }}
+            <button type="submit" name="signup" class="btn btn-primary mt-2">Sign Up</button>
+        </form>
 
-<!-- Signup Form -->
-<h3>Sign Up</h3>
-<form method="POST">
-    {% csrf_token %}
-    {{ signup_form.as_p }}
-    <button type="submit" name="signup">Sign Up</button>
-</form>
+        <!-- Login Form -->
+        <h3 class="mt-5">Login</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" name="login" class="btn btn-success mt-2">Login</button>
+            {% if login_error %}
+                <p class="text-danger mt-2">{{ login_error }}</p>
+            {% endif %}
+        </form>
 
-<!-- Login Form -->
-<h3>Login</h3>
-<form method="POST">
-    {% csrf_token %}
-    <label for="username">Username</label>
-    <input type="text" name="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
-    <button type="submit" name="login">Login</button>
-    {% if login_error %}
-    <p>{{ login_error }}</p>
-    {% endif %}
-</form>
+        <!-- Forgot Password Section -->
+        <div class="mt-4">
+            <p>Forgot your password? <a href="{% url 'send_otp' %}">Click here to reset it</a>.</p>
+        </div>
 
-<!-- Button to Redirect to Patient Login -->
-<h3>Patient Login</h3>
-<a href="{% url 'patient_login' %}">
-    <button type="button">Go to Patient Login</button>
-</a>
-
-</body>
-</html>
+ 
