@@ -237,6 +237,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+import random
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -275,10 +280,9 @@ def forgot_password(request):
         elif 'verify_otp' in request.POST:
             otp_input = request.POST.get('otp')
             if str(request.session.get('otp')) == otp_input:
-                # OTP is valid, proceed with the next steps (e.g., allow password reset)
+                # OTP is valid, proceed to reset password
                 messages.success(request, "OTP verified successfully! You can now reset your password.")
-                # You can redirect to another view or render a password reset form here
-                return redirect('reset_password')  # Example redirection to reset password view
+                return redirect('reset_password', user_id=request.session['user_id'])  # Redirect with user_id
             else:
                 messages.error(request, "Invalid OTP. Please try again.")
 
