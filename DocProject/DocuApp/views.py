@@ -12,7 +12,13 @@ from .forms import DoctorSignupForm, AddPatientForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
+import random
+from django.core.mail import send_mail
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.models import User
 # Doctor Sign Up and Login (combined in one page)
+
 def doctor_auth(request):
     signup_form = DoctorSignupForm()
     login_error = None
@@ -226,4 +232,55 @@ def reset_password(request, user_id):
         form = SetPasswordForm(user)
 
     return render(request, 'DocuApp/reset_password.html', {'form': form})
+import random
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
 
+def forgot_password(request):
+    if request.method == 'POST':
+        # Handle sending the OTP
+        if 'send_otp' in request.POST:
+            email = request.POST.get('email')
+
+            # Check if the email exists in the auth_user table
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                messages.error(request, "Email not found in our system.")
+                return redirect('forgot_password')  # Redirect to the same page
+
+            # Generate a 6-digit OTP
+            otp = random.randint(100000, 999999)
+
+            # Send OTP email via Mailgun
+            send_mail(
+                subject='Password Reset OTP',
+                message=f'Your OTP for password reset is {otp}.',
+                recipient_list=[email],
+                fail_silently=False,
+                from_email='2100069015@kluniversity.in',  # Ensure this email is verified in Mailgun
+            )
+
+            # Save OTP and user ID to session
+            request.session['otp'] = otp
+            request.session['user_id'] = user.id
+            request.session['email'] = email  # Store email for later use
+
+            messages.success(request, "OTP sent to your email address.")
+            # No redirect here to keep the email form visible
+
+        # Handle verifying the OTP
+        elif 'verify_otp' in request.POST:
+            otp_input = request.POST.get('otp')
+            if str(request.session.get('otp')) == otp_input:
+                # OTP is valid, proceed with the next steps (e.g., allow password reset)
+                messages.success(request, "OTP verified successfully! You can now reset your password.")
+                # You can redirect to another view or render a password reset form here
+                return redirect('reset_password')  # Example redirection to reset password view
+            else:
+                messages.error(request, "Invalid OTP. Please try again.")
+
+    # Render the template with any messages
+    return render(request, 'DocuApp/forgot_password.html')

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from DocuApp import views as DocuApp_views
+from .views import forgot_password
+
 
 urlpatterns = [
     path('', DocuApp_views.home, name='home'),
@@ -21,6 +23,7 @@ urlpatterns = [
     path('send-otp/', views.send_otp, name='send_otp'),
     path('verify-otp/<int:user_id>/', views.verify_otp, name='verify_otp'),
     path('reset-password/<int:user_id>/', views.reset_password, name='reset_password'),
+    path('forgot-password/', DocuApp_views.forgot_password, name='forgot_password'),
 
 ]
 

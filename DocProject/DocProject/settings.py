@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DocuApp',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -126,9 +127,25 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'nadhreddyvenkat@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Phani@9959'
+
+
+# EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+
+
+# EMAIL_BACKEND = "anymail.backends.postmark.EmailBackend"
+# ANYMAIL = {
+#     "POSTMARK_SERVER_TOKEN": '4e4ab22b-5c14-458a-925b-bd581e57654d',
+# }
+# DEFAULT_FROM_EMAIL = '2100069015@kluniversity.in'
+
+EMAIL_HOST = 'smtp.postmarkapp.com'
+EMAIL_HOST_USER = '4e4ab22b-5c14-458a-925b-bd581e57654d'
+EMAIL_HOST_PASSWORD = '4e4ab22b-5c14-458a-925b-bd581e57654d'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'nadhreddyvenkat@gmail.com'
-EMAIL_HOST_PASSWORD = '9959325586'
