@@ -1,170 +1,275 @@
-<!-- home.html -->
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
+    
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuHealth - Your Digital Healthcare Companion</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f4f6f9;
-        }
-        .header {
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-            padding: 40px 0;
-        }
-        .header h1 {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-        .header p {
-            font-size: 1.2rem;
-        }
-        .card-container {
-            margin: -40px auto 50px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 20px;
-        }
-        .card-custom {
-            width: 300px;
-            margin: 15px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        .card-custom:hover {
-            transform: translateY(-5px);
-        }
-        .card-custom img {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            width: 100%;
-        }
-        .card-custom h5 {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .card-custom p {
-            margin: 10px 0 20px;
-        }
-        .btn-custom {
-            width: 80%;
-            margin: 0 auto;
-            display: block;
-            font-size: 1rem;
-            padding: 10px 0;
-        }
-        .footer {
-            background-color: #343a40;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
+
 <body>
-
-    <!-- Header Section -->
-    <div class="header">
-        <h1>Welcome to DocuHealth</h1>
-        <p>Your Digital Healthcare Companion</p>
-    </div>
-
-    <!-- Card Container Section -->
-    <div class="container card-container">
-        <!-- Doctor Portal Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?doctor" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Doctor Portal</h5>
-                <p class="card-text">Manage your patients, upload reports, and stay connected.</p>
-                <a href="{% url 'doctor_auth' %}" class="btn btn-primary btn-custom">Go to Doctor Portal</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <h2 class="nav-heading">Docuhealth</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto mr-auto ">
+                    <a class="nav-link active" id="navItem1" href="#wcuSection">
+                        Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    <a class="nav-link" href="#exploreMenuSection" id="navItem2">Appointments</a>
+                    <a class="nav-link" href="#deliveryPaymentSection" id="navItem3">About Us</a>
+                    <a class="nav-link" href="#followUsSection" id="navItem4">Courses</a>
+                </div>
+                <div class="ml-auto">
+                    <button class="nav-botton ">Register Now</button>
+                </div>
             </div>
         </div>
-        
-        <!-- Patient Portal Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?patient" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Patient Portal</h5>
-                <p class="card-text">Access your medical reports and stay informed about your health.</p>
-                <a href="{% url 'patient_login' %}" class="btn btn-success btn-custom">Go to Patient Portal</a>
-            </div>
-        </div>
+    </nav>
 
-        <!-- Search Doctors Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?doctor-search" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Search Doctors</h5>
-                <p class="card-text">Find doctors by name or specialization.</p>
-                <a href="{% url 'search_doctors' %}" class="btn btn-info btn-custom">Search Now</a>
-            </div>
-        </div>
-
-        <!-- Help & Support Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?helpdesk" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Help & Support</h5>
-                <p class="card-text">Get assistance with any issues or questions you may have.</p>
-                <a href="{% url 'help_page' %}" class="btn btn-warning btn-custom">Get Help</a>
-            </div>
-        </div>
-
-        <!-- Appointments Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?appointment" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Appointments</h5>
-                <p class="card-text">Schedule appointments and manage your calendar.</p>
-                <a href="{% url 'appointments_page' %}" class="btn btn-info btn-custom">Manage Appointments</a>
-            </div>
-        </div>
-
-        <!-- Health Articles Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?health" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Health Articles</h5>
-                <p class="card-text">Read the latest articles on health and wellness.</p>
-                <a href="{% url 'articles_page' %}" class="btn btn-secondary btn-custom">Explore Articles</a>
-            </div>
-        </div>
-
-        <!-- Feedback Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?feedback" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Feedback</h5>
-                <p class="card-text">Share your experience and feedback with us.</p>
-                <a href="{% url 'feedback_page' %}" class="btn btn-dark btn-custom">Give Feedback</a>
-            </div>
-        </div>
-
-        <!-- Contact Us Card -->
-        <div class="card card-custom">
-            <img src="https://source.unsplash.com/300x200/?contact" class="card-img-top" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title">Contact Us</h5>
-                <p class="card-text">Reach out to our support team for any inquiries.</p>
-                <a href="{% url 'contact_page' %}" class="btn btn-outline-primary btn-custom">Contact Us</a>
+    <div class="homepage-bg-container d-flex flex-column justify-content-center">
+        <div class="column">
+            <h1 class="homepage-heading">Looking for an <span class="Expert-doctor">Expert Doctor?</span></h1>
+            <p class="homepage-para">Read doctor-produced health and medical information written for you to make informed decisions</br> about your health concerns</p1>
+            <div class="hp-buttons-container mt-4 d-flex flex-row justify-content-center">
+                <a href="{% url 'appointments_page' %}" class="hp-appointment-button mr-4 btn btn-success d-flex flex-column justify-content-center">Make Appointments</a>
+                <a href="{% url 'search_doctors' %}" class="hp-ourexperts-button mr-4 btn btn-success d-flex flex-column justify-content-center">Search Doctors</a>
             </div>
         </div>
     </div>
-
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>&copy; 2024 DocuHealth. All rights reserved.</p>
+    <div class=" mt-5">
+        <div class="row">
+            <div class="about-image-container col-12 col-md-4 ">
+                <img src="https://i0.wp.com/infinityholistichealth.com/wp-content/uploads/2020/06/IMG_0350-e1591149279793.jpeg?resize=1080%2C1444&ssl=1" class="about-image">
+            </div>
+            <div class="col-12 col-md-6 p-4 d-flex flex-column justify-content-center">
+                <p class="about-us-para">About Docuhealth</p>
+                <h2 class="about-us-heading">Transforming Healthcare with Seamless Digital Solutions</h2>
+                <p class="about-us-sentence">DocuHealth is a comprehensive digital platform designed to simplify healthcare management for both doctors and patients. It offers secure, seamless access to medical records, streamlining communication and enhancing the overall healthcare experience.</p>
+                <a href="{% url 'appointments_page' %}" class="button-main mr-4 btn btn-success d-flex flex-column justify-content-center">Make Appointments</a>
+            </div>
+        </div>
     </div>
+    <div class="mt-5 services-container ">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <h1 class="services-main-heading mt-5">OUR SERVICES</h1>
+
+        <div class="ml-5 mb-5 mr-5">
+            <div class=" services-multiple-container m-2 row">
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class="m-2 services-inner-box">
+                        <i class="fa-solid fa-laptop-medical overservices-icon"></i>
+                        <h1 class="services-heading">AI-Powered Healthcare</h1>
+                        <p class="services-para">Explain how AI, including the chatbot, improves patient care and healthcare efficiency.</p>
+                    </div>
+                </div>
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class="  services-inner-box m-2">
+                        <i class="fa-solid fa-tower-broadcast overservices-icon"></i>
+                        <h1 class="services-heading">Seamless Communication</h1>
+                        <p class="services-para">Highlight how DocuHealth bridges communication between doctors and patients.</p>
+                    </div>
+                </div>
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" services-inner-box m-2">
+                        <i class="fa-solid fa-database overservices-icon"></i>
+                        <h1 class="services-heading">Easy Data Access</h1>
+                        <p class="services-para">Describe how doctors can access comprehensive patient information instantly.</p>
+                    </div>
+                </div>
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" services-inner-box m-2">
+                        <i class="fa-solid fa-hospital overservices-icon"></i>
+                        <h1 class="services-heading">Secure Records</h1>
+                        <p class="services-para">DocuHealth ensures privacy and security, protecting sensitive data with encryption and strict controls.</p>
+                    </div>
+                </div>
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" services-inner-box m-2">
+                        <i class="fa-solid fa-user-nurse overservices-icon"></i>
+                        <h1 class="services-heading">Personalized Health Insights</h1>
+                        <p class="services-para">Explain how the platform provides tailored health insights and recommendations for patients.</p>
+                    </div>
+                </div>
+                <div class="services-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" services-inner-box m-2">
+                        <i class="fa-solid fa-phone overservices-icon"></i>
+                        <h1 class="services-heading">24/7 Health Access</h1>
+                        <p class="services-para">Access your health data anytime, from any device, for seamless and informed healthcare support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 d-inline d-md-none">
+            <div class="doctors-image-container d-flex flex-column justify-content-end">
+                <img src="https://cdn.prod.website-files.com/61013411b41b5f0b1ac69667/623d91c6686d2b83b5588ee2_Photography_MFC_JonathanHero.png" class="doctors-i-image">
+            </div>
+        </div>
+        <div class="doctors-main-container justify-content-center ml-5 row">
+            <div class="about-doctor-para-container col-12 col-md-5">
+                <p class="instant-para pt-3 ">Instant appointment</br><span class="with-doctors">With Doctors</span></p>
+                <p class="instant-matter pb-2">Empowering You to Focus on What Matters We understand that managing patient care involves a lot more than consultations. DocuHealth takes the hassle out of administration so that you can spend more time doing what you do best—caring for your patients.</p>
+                <div class="column">
+                    <div class="row mb-3">
+                        <div class="d-flex flex-column pl-2 align-items-center">
+                            <div class="check-container d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-check check"></i>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column pt-2 pl-3  justify-content-center">
+                            <p>24/7 Service Facilities</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="d-flex flex-column pl-2 align-items-center">
+                            <div class="check-container d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-check check"></i>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column pt-2 pl-3  justify-content-center">
+                            <p>Quality Doctors </p>
+                        </div>
+                    </div>
+                    <div class="row mb-5">
+                        <div class="d-flex flex-column pl-2 align-items-center">
+                            <div class="check-container d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-check check"></i>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column pt-2 pl-3  justify-content-center">
+                            <p>Trusted Medical Expertisej</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'doctor_auth' %}" class="button-main mr-4 btn btn-success d-flex flex-column justify-content-center">Go to Doctor Portal</a>
+                </div>
+            </div>
+            <div class="col-md-7 d-none d-md-inline">
+                <div class="doctors-image-container d-flex flex-column justify-content-end">
+                    <img src="https://cdn.prod.website-files.com/61013411b41b5f0b1ac69667/623d91c6686d2b83b5588ee2_Photography_MFC_JonathanHero.png" class="doctors-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="mt-2 model-container pt-2">
+        <div class="ml-0 mb-5 mr-0">
+            <div class=" m-2 row">
+                <div class="model-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" m-2 shadow model-inner-box">
+                        <img src="https://images.unsplash.com/photo-1636152147448-a0a9ad1119bd?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="chat-image m-2">
+                        <h1 class="services-heading m-2 ">Comprehensive Patient Profiles</h1>
+                        <p class="services-para "> Quickly access patient histories, prescriptions, and appointments, while seamlessly managing schedules with reminders to reduce no-shows.</p>
+                    </div>
+                </div>
+                <div class="model-mulsub-container p-2 col-12 col-md-4">
+                    <div class=" shadow model-inner-box m-2">
+                        <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="chat-image m-2">
+                        <h1 class="services-heading m-2 ">Prescription Management</h1>
+                        <p class="services-para">Generate and upload digital prescriptions directly to patient profiles, streamlining refills and follow-ups for improved efficiency in patient care.</p>
+                    </div>
+                </div>
+                <div class="model-mulsub-container  p-2 col-12 col-md-4">
+                    <div class=" shadow model-inner-box m-2">
+                        <img src="https://images.unsplash.com/photo-1666214277767-b8c2a7b4c064?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="chat-image m-2">
+                        <h1 class="services-heading m-2">Secure Medical Records</h1>
+                        <p class="services-para">Upload and securely store patient reports in PDF format for easy access, facilitating follow-ups and providing a complete view of patient history.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="mb-5">
+                <div class="row">
+                    <div class="col-12col-md-8 d-none d-md-inline">
+                        <img src="https://cdn.prod.website-files.com/61013411b41b5f0b1ac69667/619253690a3bf00264ad8d58_Photography_MFC_HomeSection-p-1600.jpeg" class="patient-image" alt="Patient Health Journey">
+                    </div>
+                    <div class="col-12 col-md-7 mb-2 p-3 d-inline d-md-none">
+                        <img src="https://cdn.prod.website-files.com/61013411b41b5f0b1ac69667/619253690a3bf00264ad8d58_Photography_MFC_HomeSection-p-1600.jpeg" class="patient-image-mobile" alt="Patient Health Journey">
+                    </div>
+                    <div class="patient-container col-12 col-md-4 d-flex flex-column justify-content-center">
+                        <div class="pl-2">
+                            <h5 class="card-title">Patient Portal</h5>
+                            <h1 class="about-us-heading">Control Your Health Journey with Ease</h1>
+                            <p class="about-us-sentence">
+                                Managing health can feel daunting, but DocuHealth is here to make it easier. With our patient-focused tools, you can access and manage your medical information effortlessly, gaining confidence and control over your healthcare journey.
+                            </p>
+                            <a href="{% url 'patient_login' %}" class="button-main mr-4 btn btn-success d-flex flex-column justify-content-center">Go to Patient Portal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <div class="row">
+                    <div class="col-12 col-md-7 mb-2 p-3 d-inline d-md-none">
+                        <img src="https://images.unsplash.com/photo-1666214277657-e60f05c40b04?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="patient-image-mobile" alt="Patient Health Journey">
+                    </div>
+                    <div class="patient-container col-12 col-md-4 d-flex flex-column justify-content-center">
+                        <div class="pl-2">
+                            <h1 class="about-us-heading">Enhanced Interaction with Our AI-Powered Medical Assistant</h1>
+                            <p class="about-us-sentence">
+                                Managing health can feel daunting, but DocuHealth is here to make it easier. With our patient-focused tools, you can access and manage your medical information effortlessly, gaining confidence and control over your healthcare journey.
+                            </p>
+                            <div class="mr-auto">
+                                <button class="navv-botton">Learn More about Our Medical Assistant</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12col-md-8 d-none d-md-inline">
+                        <img src="https://images.unsplash.com/photo-1666214277657-e60f05c40b04?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="patient-image" alt="Patient Health Journey">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portal-bg-container d-flex flex-column justify-content-center">
+            <div class="portal-sections ">
+                <div class="row col-12 col-md-7 d-flex  justify-content-center">
+                    <div class="card card-custom d-none d-md-inline">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Feedback</h5>
+                            <p class="card-text">Share your experience and feedback with us.</p>
+                            <a href="{% url 'feedback_page' %}" class=" btnnnn btn btn-outline-primary btn-custom">Give Feedback</a>
+                        </div>
+                    </div>
+                    <div class="card card-custom">
+                        <img src="https://source.unsplash.com/300x200/?health" class="card-img-top" alt="">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Health Articles</h5>
+                            <p class="card-text">Read the latest articles on health and wellness.</p>
+                            <a href="{% url 'articles_page' %}" class=" btnnnn btn btn-outline-primary btn-custom">Explore Articles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-12 col-md-7 d-flex  justify-content-center">
+                    <div class="card card-custom">
+                        <img src="https://source.unsplash.com/300x200/?contact" class="card-img-top" alt="">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Contact Us</h5>
+                            <p class="card-text">Reach out to our support team for any inquiries.</p>
+                            <a href="{% url 'contact_page' %}" class="btnnnn btn btn-outline-primary btn-custom">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="card card-custom">
+                        <img src="https://source.unsplash.com/300x200/?helpdesk" class="card-img-top" alt="">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Help & Support</h5>
+                            <p class="card-text">Get assistance with any issues or questions you may have.</p>
+                            <a href="{% url 'help_page' %}" class="btnnnn btn btn-outline-primary btn-custom">Get Help</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 </body>
+
 </html>
